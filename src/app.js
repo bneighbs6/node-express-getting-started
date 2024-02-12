@@ -43,7 +43,7 @@ const logging = (req, res, next) => {
 // app.get() accepts 2 arguments
 // 1. the ROUTE you want your Express function to run
 // 2. Express function you want run on that ROUTE
-// the server is only responding with the sayHello() middleware when you go to the /hello route. 
+// the server is only responding with the sayHello() middleware when you go to the /hello route. END OF "BUILDING ROUTES" LESSON
 app.get("/hello", sayHello);
 
 
