@@ -37,7 +37,14 @@ const logging = (req, res, next) => {
 // logging needs to be put first due to the fact that sayHello does not have a next() fx inside it. 
 // with no next() inside, the middleware will not go to the next middleware fx
 // app.use(logging);
-app.use(sayHello);
+// Replacing app.use() with app.get() method
+// app.use(sayHello);
+
+// app.get() accepts 2 arguments
+// 1. the ROUTE you want your Express function to run
+// 2. Express function you want run on that ROUTE
+// will only display express fx on the route given. 
+app.get("/hello", sayHello);
 
 
 // export Express app to be used in other files
