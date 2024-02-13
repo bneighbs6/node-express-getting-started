@@ -22,24 +22,47 @@ const app = express();
 // assign query.name to a variable
 // assign tertiary operator to name variable
 // send content to screen
+
+// commenting out and placing inside the app.get() method for organization
+/*
 const sayHello = (req, res, next) => {
     console.log(req.query);
     const name = req.query.name;
     const content = name ? `Hello ${name}!` : "Hello!";
     res.send(content)
 }
+*/
 
 // saySomething middleware fx
 // uses params feature for a greeting 
 // this can be used in a route parameter when using app.get()
-const saySomething = (req, res, nex) => {
+
+// commenting out and placing inside the app.get() method for organization
+/*
+const saySomething = (req, res, next) => {
     const greeting = req.params.greeting;
     const name = req.query.name;
     const content = greeting && name ? `${greeting}, ${name}` : `${greeting}`;
     res.send(content);
 }
+*/
 
-app.get("/say/:greeting", saySomething)
+// commenting out and placing inside the app.get() method for organization
+/*
+const sayGoodbye = (req, res, next) => {
+    res.send("Sorry to see you go.")
+}
+*/
+
+app.get("/say/goodbye", (req, res, next) => {
+    res.send("Sorry to see you go.")
+})
+app.get("/say/:greeting", (req, res, next) => {
+    const greeting = req.params.greeting;
+    const name = req.query.name;
+    const content = greeting && name ? `${greeting}, ${name}` : `${greeting}`;
+    res.send(content);
+})
 
 
 // Replace logging function below
