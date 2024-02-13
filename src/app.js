@@ -77,6 +77,19 @@ app.use((req, res, next) => {
 })
 
 
+// Error handler has a fourth argument
+/* 
+If you try to access this function normally, you may have a hard time. The error-handler middleware only gets called in one of two cases:
+
+1. When there is a problem in the application itself (for example, if you made a mistake in your code).
+
+2. When you specifically trigger it using the next() function in a previous middleware function.
+*/
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.send(err);
+})
+
 // Replace logging function below
 // morgan will log incoming requests like: "GET / 304 3.881 ms - - GET /favicon.ico 304 0.519 ms - -"
 app.use(morgan("dev"));
