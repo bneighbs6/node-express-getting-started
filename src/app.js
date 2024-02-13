@@ -54,6 +54,13 @@ const sayGoodbye = (req, res, next) => {
 }
 */
 
+app.get("/say/hello", (req, res, next) => {
+    console.log(req.query);
+    const name = req.query.name;
+    const content = name ? `Hello ${name}!` : "Hello!";
+    res.send(content)
+})
+
 app.get("/say/goodbye", (req, res, next) => {
     res.send("Sorry to see you go.")
 })
@@ -62,6 +69,11 @@ app.get("/say/:greeting", (req, res, next) => {
     const name = req.query.name;
     const content = greeting && name ? `${greeting}, ${name}` : `${greeting}`;
     res.send(content);
+})
+
+// adding an error handler for invalid url
+app.use((req, res, next) => {
+    res.send(`The route ${req.path} does not exist.`) // req.path = any entered url after first "/"
 })
 
 
@@ -89,7 +101,7 @@ const logging = (req, res, next) => {
 // 1. the ROUTE you want your Express function to run
 // 2. Express function you want run on that ROUTE
 // the server is only responding with the sayHello() middleware when you go to the /hello route. END OF "BUILDING ROUTES" LESSON
-app.get("/hello", sayHello);
+
 
 
 // export Express app to be used in other files
