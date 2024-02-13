@@ -29,6 +29,19 @@ const sayHello = (req, res, next) => {
     res.send(content)
 }
 
+// saySomething middleware fx
+// uses params feature for a greeting 
+// this can be used in a route parameter when using app.get()
+const saySomething = (req, res, nex) => {
+    const greeting = req.params.greeting;
+    const name = req.query.name;
+    const content = greeting && name ? `${greeting}, ${name}` : `${greeting}`;
+    res.send(content);
+}
+
+app.get("/say/:greeting", saySomething)
+
+
 // Replace logging function below
 // morgan will log incoming requests like: "GET / 304 3.881 ms - - GET /favicon.ico 304 0.519 ms - -"
 app.use(morgan("dev"));
