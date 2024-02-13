@@ -71,7 +71,7 @@ app.get("/say/:greeting", (req, res, next) => {
     res.send(content);
 })
 
-// adding an error handler for invalid url
+// Add a missing route handler
 app.use((req, res, next) => {
     res.send(`The route ${req.path} does not exist.`) // req.path = any entered url after first "/"
 })
