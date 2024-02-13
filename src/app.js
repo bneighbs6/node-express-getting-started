@@ -16,8 +16,17 @@ const app = express();
 // req = request. Information and methods related to the incoming request will be stored in this object.
 // res = response. This object has information and methods related to sending back a response from the server.
 // next = next. tells Express that this middleware function is complete. It will then go on to the next piece of middleware.
+
+// updating sayHello() fx for "Query and Route Parameters" lesson
+// log the query to console
+// assign query.name to a variable
+// assign tertiary operator to name variable
+// send content to screen
 const sayHello = (req, res, next) => {
-    res.send("Hello!")
+    console.log(req.query);
+    const name = req.query.name;
+    const content = name ? `Hello ${name}!` : "Hello!";
+    res.send(content)
 }
 
 // Replace logging function below
