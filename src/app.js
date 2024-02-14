@@ -71,13 +71,31 @@ app.get("/say/:greeting", (req, res, next) => {
     res.send(content);
 })
 
-// New route for state abbreviations
-app.get("/states/:abbreviation", (req, res, next) => {
+// Router level middleware function
+// Used to clean up both middleware functions below
+// Checks abbreviations in this fx so you can eliminate that code in the other functions
+// Add checkForAbbreviations as an argument to the other routes
+const checkForAbbreviations = (req, res, next) => {
     const abbreviation = req.params.abbreviation;
     if (abbreviation.length !== 2) {
-        next(`State abbreviation is invalid `)
+        next(`The abbreviation "${abbreviation}" is invalid`)
     } else {
-        res.send(`${abbreviation} is a nice state and I'd like to visit.`)
+        next();
+    }
+}
+
+// New route for state abbreviations
+app.get("/states/:abbreviation", checkForAbbreviations, (req, res, next) => {
+        res.send(`${req.params.abbreviation} is a nice state and I'd like to visit.`)
+})
+
+// New route for travel/:abbreviations
+app.get("/travel/:abbreviation", (req, res, next)=> {
+    const abbreviation = req.params.abbreviation;
+    if (abbreviation.length !== 2) {
+        next(`The abbreviation "${abbreviation}" is invalid.`)
+    } else {
+        res.send(`Have a good trip to ${abbreviation}!`)
     }
 })
 
