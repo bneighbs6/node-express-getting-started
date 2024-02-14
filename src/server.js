@@ -1,4 +1,4 @@
-// create port and set it = whatever is in process.env (set default to 5000)
+// create port and set it = whatever is in process.env (set default to 8000)
 const {PORT = 8000} = process.env;
 
 // Require Express application (app) that was created in app.js
