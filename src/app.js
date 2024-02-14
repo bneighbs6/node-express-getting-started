@@ -71,7 +71,19 @@ app.get("/say/:greeting", (req, res, next) => {
     res.send(content);
 })
 
+// New route for state abbreviations
+app.get("/states/:abbreviation", (req, res, next) => {
+    const abbreviation = req.params.abbreviation;
+    if (abbreviation.length !== 2) {
+        next(`State abbreviation is invalid `)
+    } else {
+        res.send(`${abbreviation} is a nice state and I'd like to visit.`)
+    }
+})
+
 // Add a missing route handler
+// This is missing a route as its first parameter which means
+// this handler will be called whenever a route does not exist.
 app.use((req, res, next) => {
     res.send(`The route ${req.path} does not exist.`) // req.path = any entered url after first "/"
 })
